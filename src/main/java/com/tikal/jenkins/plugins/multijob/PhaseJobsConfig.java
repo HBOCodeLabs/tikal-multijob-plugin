@@ -209,7 +209,7 @@ public class PhaseJobsConfig implements Describable<PhaseJobsConfig> {
 				disableJob, enableRetryStrategy, parsingRulesPath, maxRetries, enableCondition,
 				abortAllJob, condition, buildOnlyIfSCMChanges, applyConditionOnlyIfNoSCMChanges, false);
         }
-        
+
 	@DataBoundConstructor
 	public PhaseJobsConfig(String jobName, String jobAlias, String jobProperties,
 			boolean currParams, List<AbstractBuildParameters> configs,

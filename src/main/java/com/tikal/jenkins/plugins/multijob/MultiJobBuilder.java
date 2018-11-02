@@ -268,7 +268,8 @@ public class MultiJobBuilder extends Builder implements DependecyDeclarer {
         final CounterManager phaseCounters = new CounterManager();
         boolean aggragatedTestResults = false;
         for (PhaseJobsConfig phaseJobConfig : phaseJobs) {
-            Item item = jenkins.getItem(phaseJobConfig.getJobName(), multiJobBuild.getParent(), AbstractProject.class);
+            String resolvedJobName = expandToken(phaseJobConfig.getJobName(), build, listener);
+            Item item = jenkins.getItem(resolvedJobName, multiJobBuild.getParent(), AbstractProject.class);
             if (item instanceof AbstractProject) {
                 AbstractProject job = (AbstractProject) item;
                 phaseSubJobs.put(new PhaseSubJob(job), phaseJobConfig);
@@ -277,7 +278,7 @@ public class MultiJobBuilder extends Builder implements DependecyDeclarer {
                 aggragatedTestResults = true;
             }
         }
-        
+
         if (aggragatedTestResults) {
             multiJobBuild.addTestsResult();
         }
